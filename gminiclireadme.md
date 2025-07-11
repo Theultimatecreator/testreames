@@ -15,12 +15,12 @@ This application is composed of several distinct feature modules, each handling 
 *   **Home:** The main dashboard or landing screen of the application.
 *   **Login:** Handles user authentication and session management.
 *   **Order:** Manages order creation, modification, and processing.
-*   **Payment:** Core payment processing            │
-             functionalities, supporting various payment         │
-             methods including card payments, QR code payments,  │
-             and potentially integrations with specific local    │
-             payment systems. Details on supported payment       │
-             methods (e.g., Humo, Uzcard, or other apps) would   │
+*   **Payment:** Core payment processing            
+             functionalities, supporting various payment         
+             methods including card payments, QR code payments,  
+             and potentially integrations with specific local    
+             payment systems. Details on supported payment       
+             methods (e.g., Humo, Uzcard, or other apps) would   
            be found within this module's implementation.   
 *   **Profile:** Allows users to view and edit their profile information.
 *   **Receipt:** Generates and manages transaction receipts.
