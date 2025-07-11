@@ -1,156 +1,113 @@
-# Smart ERA
+# Mobile SmartPOS ERA KKM
 
-Smart ERA is a modular, production-grade Android application for smart POS (Point of Sale) terminals, built with Kotlin, Jetpack Compose, Hilt, and a clean architecture approach. The project is designed for extensibility, maintainability, and robust hardware integration, supporting a wide range of payment, fiscal, and business operations.
-
----
-
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Architecture](#architecture)
-- [Modules](#modules)
-- [Features](#features)
-- [Build & Run](#build--run)
-- [Dependencies](#dependencies)
-- [Configuration](#configuration)
-- [ProGuard & Security](#proguard--security)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## Project Overview
-Smart ERA is a comprehensive POS solution for Android, supporting advanced payment flows, fiscalization, device management, and business operations. It is built as a multi-module Gradle project, leveraging modern Android development best practices.
-
-- **Minimum SDK:** 22
-- **Target SDK:** 34
-- **Language:** Kotlin
-- **UI:** Jetpack Compose
-- **Dependency Injection:** Hilt
-- **Build System:** Gradle (Kotlin DSL)
-- **Main Application ID:** `uz.cdti.smart.era.app`
-
----
-
-## Architecture
-The project follows a clean, modular architecture:
-- **App Layer:** Entry point, DI setup, navigation, and global configuration.
-- **Feature Modules:** Each business domain (e.g., Home, Payment, Order, Fiscal, etc.) is a separate module.
-- **Data Layer:** Handles local, remote, and repository data sources.
-- **Domain Layer:** Contains business logic and use cases.
-- **Common & Libraries:** Shared code, UI components, dialogs, and hardware abstractions.
-
-### Main Entry Points
-- **Application:** [`SmartposApp`](app/src/main/java/uz/uzkassa/smartpos/app/SmartposApp.kt)
-- **Main Activity:** [`MainActivity`](app/src/main/java/uz/uzkassa/smartpos/app/MainActivity.kt)
-- **Compose App:** [`SmartposComposeApp`](app/src/main/java/uz/uzkassa/smartpos/app/ui/SmartposComposeApp.kt)
-
----
-
-## Modules
-The project is organized into the following Gradle modules:
-
-- **:app** — Main application module
-- **:common:base, :common:provider, :common:theme** — Shared code and themes
-- **:data:local, :data:model, :data:remote, :data:repository** — Data sources and repositories
-- **:domain** — Business logic and use cases
-- **:features:**
-  - account, apay, cash_operations, cash_operations_management, credit_advance, fiscal, home, login, order, payment, profile, receipt, refund
-- **:hardware** — Hardware abstraction and integration
-- **:libraries:**
-  - core-ui, core-ui-resources, dialogs, framework, scanner
-- **:build-logic** — Gradle build logic and conventions
-
----
+This repository contains the source code for the Mobile SmartPOS ERA KKM application, a modern Android application designed for Point of Sale (POS) operations, likely integrating with fiscal registers (KKM). The project is built with a modular architecture to ensure scalability, maintainability, and clear separation of concerns.
 
 ## Features
-- Modularized business features (Account, Payment, Order, Fiscal, etc.)
-- Hardware integration (Bluetooth, USB, Camera, etc.)
-- Secure data handling and backup
-- WorkManager-based background jobs (sync, backup, notifications)
-- Jetpack Compose UI with custom theming
-- Multi-language support
-- Dependency injection with Hilt
-- ProGuard/R8 configuration for release builds
-- Firebase integration (Config, Analytics, Crashlytics)
-- Device and firmware management
 
----
+*   **Point of Sale Operations:** Core functionalities for processing sales transactions.
+*   **Modular Design:** Features are organized into independent modules for better development and testing.
+*   **Hardware Integration:** Support for various POS hardware devices.
+*   **User Management:** (Assumed) Login and account management.
+*   **Cash Operations:** (Assumed) Handling cash-related transactions.
+*   **Payment Processing:** (Assumed) Integration with payment systems.
+*   **Receipt Generation:** (Assumed) Printing or displaying receipts.
 
-## Build & Run
+## Technologies Used
+
+*   **Kotlin:** The primary programming language for Android development.
+*   **Android Jetpack Compose:** Modern toolkit for building native Android UI.
+*   **Gradle Kotlin DSL:** Build automation system for managing dependencies and build processes.
+*   **Detekt:** Static code analysis tool for Kotlin.
+*   **GitLab CI:** Continuous Integration/Continuous Deployment pipeline.
+
+## Architecture
+
+The project follows a clean architecture approach, separating the application into distinct layers:
+
+*   **`app`**: The main application module, responsible for assembling the features and providing the entry point.
+*   **`common`**: Contains reusable components, base classes, UI elements, and themes shared across multiple modules.
+*   **`data`**: Handles data sources (local databases, remote APIs), data models, and repository implementations.
+*   **`domain`**: Encapsulates the core business logic and use cases, independent of any specific framework.
+*   **`features`**: Each subdirectory within `features` represents a distinct feature module (e.g., `login`, `home`, `payment`), containing its own UI, view models, and feature-specific logic.
+*   **`hardware`**: Manages integrations with various POS hardware devices.
+*   **`libraries`**: Contains shared UI components, framework utilities, and scanner functionalities that can be reused across features.
+*   **`build-logic`**: Custom Gradle build logic and convention plugins to standardize configurations across modules.
+
+## Getting Started
+
+Follow these instructions to set up and run the project on your local machine.
 
 ### Prerequisites
-- **JDK 17+**
-- **Android Studio Giraffe or newer**
-- **Android SDK 34**
-- **Gradle 8.4+**
 
-### Setup
-1. **Clone the repository:**
-   ```sh
-   git clone <repo-url>
-   cd mobile-smartpos-era-kkm
-   ```
-2. **Configure local properties:**
-   - Copy `local.properties.example` to `local.properties` and fill in the required values.
-3. **Run setup script (Linux/macOS):**
-   ```sh
-   sh ./scripts/setup.sh
-   ```
-   Or on Windows, ensure Git Bash is installed and run the script.
-4. **Build the project:**
-   ```sh
-   ./gradlew clean build
-   ```
-5. **Run on device/emulator:**
-   ```sh
-   ./gradlew :app:installDebug
-   ```
+*   **Java Development Kit (JDK):** Version 17 or higher.
+*   **Android Studio:** Latest stable version recommended.
 
-### APK Output
-- APKs are output to `app/build/outputs/apk/` with names like `app-debug-v3-3.apk` or `app-release-v3-3.apk`.
+### Cloning the Repository
 
----
+```bash
+git clone https://github.com/your-username/mobile-smartpos-era-kkm.git
+cd mobile-smartpos-era-kkm
+```
 
-## Dependencies
-Key libraries and frameworks:
-- **Jetpack Compose** (UI)
-- **Hilt** (DI)
-- **Room** (Database)
-- **WorkManager** (Background tasks)
-- **Firebase** (Config, Analytics, Crashlytics)
-- **Retrofit, OkHttp** (Networking)
-- **Coil** (Image loading)
-- **Timber** (Logging)
-- **Custom hardware SDKs:** gtpos, era, kozen, nexgo, fiscal, etc.
-- **Testing:** JUnit, Espresso, MockK
+### Opening in Android Studio
 
-See [`gradle/libs.versions.toml`](gradle/libs.versions.toml) for all versions and libraries.
+1.  Open Android Studio.
+2.  Select `File` > `Open` and navigate to the cloned `mobile-smartpos-era-kkm` directory.
+3.  Android Studio will automatically sync the Gradle project.
 
----
+### Building the Project
 
-## Configuration
-- **ProGuard rules:** See [`app/proguard-rules.pro`](app/proguard-rules.pro)
-- **Detekt (static analysis):** Configured in [`config/detekt/detekt.yml`](config/detekt/detekt.yml)
-- **Signing config:** Release signing uses `app/appkeystore/appkeystore.jks` (see `app/build.gradle.kts`)
-- **Environment variables:** Some Maven credentials and URLs are loaded from `local.properties` or environment variables.
+To build the project from the command line:
 
----
+```bash
+./gradlew assembleDebug
+```
 
-## ProGuard & Security
-- ProGuard rules are provided for all major libraries and custom SDKs.
-- Sensitive keys and passwords should be managed securely and not committed to VCS.
-- Ensure to update `local.properties` and keystore files for production builds.
+### Running the Application
 
----
+To run the application on an emulator or a connected device from Android Studio, select the `app` module and click the `Run` button.
+
+Alternatively, from the command line:
+
+```bash
+./gradlew installDebug
+```
+
+## Project Structure
+
+Here's a brief overview of the top-level directories:
+
+*   `app/`: Main application module.
+*   `build-logic/`: Custom Gradle build logic and convention plugins.
+*   `common/`: Shared common modules (base, provider, theme).
+*   `data/`: Data layer modules (local, model, remote, repository).
+*   `domain/`: Domain layer module containing business logic.
+*   `features/`: Individual feature modules (e.g., `account`, `login`, `payment`).
+*   `gradle/`: Gradle wrapper and version catalog (`libs.versions.toml`).
+*   `hardware/`: Hardware integration module.
+*   `libraries/`: Reusable UI and utility libraries.
+*   `scripts/`: Utility scripts (e.g., `pre-push.sh`, `setup.sh`).
+
+## Code Quality and Style
+
+This project uses [Detekt](https://detekt.dev/) for static code analysis to maintain code quality and consistency.
+
+To run Detekt checks:
+
+```bash
+./gradlew detekt
+```
+
+Configuration for Detekt can be found in `config/detekt/detekt.yml`.
+
+## CI/CD
+
+The project uses GitLab CI for continuous integration and deployment. The configuration is defined in `.gitlab-ci.yml`.
 
 ## Contributing
-1. Fork the repository and create your branch from `main`.
-2. Follow the code style and Detekt rules.
-3. Write clear commit messages and document your code.
-4. Test your changes thoroughly.
-5. Submit a merge request with a clear description.
 
----
+Contributions are welcome! Please follow the existing code style and submit pull requests for any new features or bug fixes.
 
 ## License
-This project is proprietary and confidential. All rights reserved.
+
+(Add your project's license information here, e.g., MIT, Apache 2.0)
